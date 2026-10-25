@@ -1,0 +1,14 @@
+{
+  "title": "Dylan Wang Portfolio",
+  "description": "Showcases Dylan Wang's CS portfolio on a dynamic, handwritten-style interactive notebook paper desk.",
+  "icons": {
+    "icon": "/catdoodle.jpg"
+  },
+  "robots": {
+    "index": true
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
