@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 
 export default function ChelseaDoodle() {
-  const [doodleSrc, setDoodleSrc] = useState<string>("/chelsea.jpeg");
+  const chelseaUrl = `${import.meta.env.BASE_URL}chelsea.jpeg`;
+  const [doodleSrc, setDoodleSrc] = useState<string>(chelseaUrl);
 
   useEffect(() => {
     const img = new Image();
-    img.src = "/chelsea.jpeg";
+    img.src = chelseaUrl;
     img.onload = () => {
       try {
         const canvas = document.createElement("canvas");
