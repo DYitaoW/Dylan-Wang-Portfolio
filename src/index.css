@@ -633,8 +633,10 @@ a {
 }
 
 @supports not (zoom: 1) {
-  .desk-layout {
+  .desk-layout,
+  .phone-disabled .desk-layout {
     transform: scale(var(--desk-scale, 1));
+    transform-origin: center center;
   }
 }
 
