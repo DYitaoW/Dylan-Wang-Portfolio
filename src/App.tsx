@@ -119,6 +119,32 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    const updateDeskScale = () => {
+      // Natural design footprint of the two notebook papers side-by-side
+      const BASE_WIDTH = 1340;
+      const BASE_HEIGHT = 900;
+
+      const paddingX = window.innerWidth <= 640 ? 16 : 48;
+      const paddingY = window.innerHeight <= 640 ? 16 : 48;
+
+      const availWidth = Math.max(300, window.innerWidth - paddingX);
+      const availHeight = Math.max(300, window.innerHeight - paddingY);
+
+      const scaleX = availWidth / BASE_WIDTH;
+      const scaleY = availHeight / BASE_HEIGHT;
+
+      // Uniformly scale down so all parts of the paper scale equally and maintain exact positions
+      const scale = Math.min(1, Math.min(scaleX, scaleY));
+
+      document.documentElement.style.setProperty("--desk-scale", scale.toFixed(4));
+    };
+
+    updateDeskScale();
+    window.addEventListener("resize", updateDeskScale);
+    return () => window.removeEventListener("resize", updateDeskScale);
+  }, []);
+
+  useEffect(() => {
     let rafId: number | null = null;
     const onNativePointerMove = (event: PointerEvent) => {
       cursorPosition.current = { x: event.clientX, y: event.clientY };
