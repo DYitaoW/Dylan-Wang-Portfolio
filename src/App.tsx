@@ -119,31 +119,27 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    let rafId: number | null = null;
     const onNativePointerMove = (event: PointerEvent) => {
       cursorPosition.current = { x: event.clientX, y: event.clientY };
       if (cursor.striking || cursor.circling) return;
-      if (cursorElement.current) {
-        cursorElement.current.style.transform = "";
-        cursorElement.current.style.left = `${event.clientX}px`;
-        cursorElement.current.style.top = `${event.clientY}px`;
+      if (cursorElement.current && rafId === null) {
+        rafId = requestAnimationFrame(() => {
+          rafId = null;
+          if (cursorElement.current && !cursor.striking && !cursor.circling) {
+            cursorElement.current.style.left = `${cursorPosition.current.x}px`;
+            cursorElement.current.style.top = `${cursorPosition.current.y}px`;
+          }
+        });
       }
     };
 
     window.addEventListener("pointermove", onNativePointerMove, { passive: true });
     return () => {
+      if (rafId !== null) cancelAnimationFrame(rafId);
       window.removeEventListener("pointermove", onNativePointerMove);
     };
   }, [cursor.striking, cursor.circling]);
-
-  function movePencil(event: ReactPointerEvent<HTMLElement>) {
-    cursorPosition.current = { x: event.clientX, y: event.clientY };
-    if (cursor.striking || cursor.circling) return;
-    if (cursorElement.current) {
-      cursorElement.current.style.transform = "";
-      cursorElement.current.style.left = `${event.clientX}px`;
-      cursorElement.current.style.top = `${event.clientY}px`;
-    }
-  }
 
   function changeDrawingTool(tool: DrawingTool) {
     if (cursorElement.current) {
@@ -535,7 +531,6 @@ export default function App() {
       onPointerDown={(e) => {
         pointerDownPos.current = { x: e.clientX, y: e.clientY };
       }}
-      onPointerMove={movePencil}
       onClickCapture={followLink}
       onContextMenu={(e) => e.preventDefault()}
     >

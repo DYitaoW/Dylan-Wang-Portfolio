@@ -246,7 +246,17 @@ a {
   place-items: center;
   padding: 72px 80px;
   overflow: hidden;
-  background: #d6c6b3 url("./assets/desk-background.png") center / cover fixed;
+  background-color: #d6c6b3;
+}
+
+.desk::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: #d6c6b3 url("./assets/desk-background.png") center / cover no-repeat;
+  pointer-events: none;
+  transform: translateZ(0);
 }
 
 .desk,
@@ -268,6 +278,7 @@ a {
   pointer-events: none;
   transform: rotate(-18deg);
   transform-origin: -34px center;
+  will-change: left, top;
 }
 
 .cursor-pencil::before {
