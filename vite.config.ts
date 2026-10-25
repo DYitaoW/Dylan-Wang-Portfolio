@@ -14,9 +14,11 @@ export default defineConfig(({ mode }) => {
   return {
     base: process.env.FIGMA_PUBLIC_URL
       ? `${process.env.FIGMA_PUBLIC_URL}/`
-      : mode === 'production'
-        ? '/Dylan-Wang-Portfolio/'
-        : '/',
+      : process.env.GITHUB_REPOSITORY
+        ? `/${process.env.GITHUB_REPOSITORY.split('/')[1]}/`
+        : mode === 'production'
+          ? '/Portfolio/'
+          : '/',
     build: {
       sourcemap: emitSourcemaps ? 'inline' : false,
       minify: !emitSourcemaps,
