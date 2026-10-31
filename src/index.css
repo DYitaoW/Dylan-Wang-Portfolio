@@ -246,7 +246,11 @@ a {
   place-items: center;
   padding: 72px 80px;
   overflow: hidden;
-  background: #d6c6b3 url("./assets/desk-background.png") center / cover fixed;
+  background-color: #d6c6b3;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .desk,

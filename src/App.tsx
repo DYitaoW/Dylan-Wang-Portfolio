@@ -9,6 +9,7 @@ import { ClearDrawingsNote, PencilCursor } from "./components/DeskControls";
 import type { CursorState, DrawingTool } from "./components/DeskControls";
 import PortfolioPapers from "./components/PortfolioPapers";
 import ScribbleCanvas from "./components/ScribbleCanvas";
+import deskBackground from "./assets/desk-background.png";
 
 const SHOW_PHONE = false;
 export type LinkAnimationType = "horizontal" | "scribble" | "circle" | "random";
@@ -532,6 +533,9 @@ export default function App() {
   return (
     <main
       className="desk phone-disabled"
+      style={{
+        backgroundImage: `url(${deskBackground})`,
+      }}
       onPointerDown={(e) => {
         pointerDownPos.current = { x: e.clientX, y: e.clientY };
       }}
