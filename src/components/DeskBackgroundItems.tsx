@@ -6,7 +6,7 @@ const SHOW_CLOCK = false;
 const SHOW_CALENDAR = false;
 
 // Drop your photo into the `public` folder as `polaroid.jpg` (e.g. public/polaroid.jpg)
-const PHOTO_SRC = "/polaroid.jpg";
+const PHOTO_SRC = `${import.meta.env.BASE_URL}polaroid.jpg`;
 
 function formatTime(date: Date) {
   return date.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });

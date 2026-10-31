@@ -45,6 +45,8 @@ export default function PortfolioPapers({
   clearSignal: number;
   tool: DrawingTool;
 }) {
+  const base = import.meta.env.BASE_URL;
+
   return (
     <section className="desk-layout" aria-label="Dylan Wang portfolio">
       <article className="sheet main-sheet">
@@ -61,7 +63,7 @@ export default function PortfolioPapers({
 
             {/* Hand-drawn Grad 2028 Doodle in top right of main page */}
             <div className="grad-doodle-wrapper" aria-hidden="true" title="Graduation 2028 doodle">
-              <PaperDoodle src="/graddoodle.jpg" alt="Graduation 2028 doodle" className="grad-doodle-img" />
+              <PaperDoodle src={`${base}graddoodle.png`} alt="Graduation 2028 doodle" className="grad-doodle-img" />
             </div>
           </header>
           <section className="about">
@@ -80,7 +82,7 @@ export default function PortfolioPapers({
 
           {/* Purdue University 'P' Doodle between About and Experience */}
           <div className="purdue-doodle-wrapper" aria-hidden="true" title="Purdue P logo doodle">
-            <PaperDoodle src="/purduedoodle.jpg" alt="Purdue University P logo doodle" className="purdue-doodle-img" />
+            <PaperDoodle src={`${base}purduedoodle.png`} alt="Purdue University P logo doodle" className="purdue-doodle-img" />
           </div>
 
           <section className="experience shifted-experience">
@@ -114,7 +116,7 @@ export default function PortfolioPapers({
             <a href="https://github.com/DYitaoW" target="_blank" rel="noopener noreferrer">Github ↗</a>
             <a href="https://www.linkedin.com/in/dylanywang06/" target="_blank" rel="noopener noreferrer">Linkedin ↗</a>
             <a href="mailto:dylanywang06@gmail.com">Say Hello! ↗</a>
-            <a href="/Wang-Dylan-Resume2026.pdf" target="_blank" rel="noopener noreferrer" title="View & Download Resume PDF">My Resume ↗</a>
+            <a href={`${base}Wang-Dylan-Resume2026.pdf`} target="_blank" rel="noopener noreferrer" title="View & Download Resume PDF">My Resume ↗</a>
           </nav>
 
           {/* Click Me! hint with upward curved arrows pointing to the links */}
@@ -132,7 +134,7 @@ export default function PortfolioPapers({
 
           {/* Hand-drawn Chelsea FC crest doodle */}
           <div className="chelsea-doodle-wrapper" aria-hidden="true" title="Chelsea FC sketch doodle">
-            <PaperDoodle src="/chelsea.jpeg" alt="Chelsea Football Club hand-drawn crest doodle" className="chelsea-doodle-img" />
+            <PaperDoodle src={`${base}chelsea.png`} alt="Chelsea Football Club hand-drawn crest doodle" className="chelsea-doodle-img" />
           </div>
           <p className="paper-signoff">thanks for stopping by!</p>
         </div>
@@ -144,7 +146,7 @@ export default function PortfolioPapers({
         <div className="project-content">
           {/* Hand-drawn Cat Doodle in top right of second page */}
           <div className="cat-doodle-wrapper" aria-hidden="true" title="Cat doodle">
-            <PaperDoodle src="/catdoodle.jpg" alt="Cat sketch doodle" className="cat-doodle-img" />
+            <PaperDoodle src={`${base}catdoodle.png`} alt="Cat sketch doodle" className="cat-doodle-img" />
           </div>
 
           <header className="project-header">
@@ -199,7 +201,7 @@ export default function PortfolioPapers({
           <footer className="project-footer">
             {/* Hand-drawn Washington Commanders 'W' doodle above email */}
             <div className="commanders-doodle-wrapper" aria-hidden="true" title="Washington Commanders doodle">
-              <PaperDoodle src="/commandersdoodle.jpg" alt="Washington Commanders W doodle" className="commanders-doodle-img" />
+              <PaperDoodle src={`${base}commandersdoodle.png`} alt="Washington Commanders W doodle" className="commanders-doodle-img" />
             </div>
             <span>Want to get in contact?</span>
             <a href="mailto:dylanywang06@gmail.com">dylanywang06@gmail.com</a>
@@ -207,12 +209,12 @@ export default function PortfolioPapers({
 
           {/* Hand-drawn Tic-Tac-Toe Doodle between Commanders and Apple */}
           <div className="tictactoe-doodle-wrapper" aria-hidden="true" title="Tic-tac-toe doodle">
-            <PaperDoodle src="/tictactoe.jpg" alt="Tic-tac-toe doodle" className="tictactoe-doodle-img" />
+            <PaperDoodle src={`${base}tictactoe.png`} alt="Tic-tac-toe doodle" className="tictactoe-doodle-img" />
           </div>
 
           {/* Hand-drawn Apple Doodle in bottom right of second page */}
           <div className="apple-doodle-wrapper" aria-hidden="true" title="Apple logo doodle">
-            <PaperDoodle src="/appledoodle.jpg" alt="Apple logo sketch doodle" className="apple-doodle-img" />
+            <PaperDoodle src={`${base}appledoodle.png`} alt="Apple logo sketch doodle" className="apple-doodle-img" />
           </div>
         </div>
       </article>

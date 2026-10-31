@@ -244,13 +244,19 @@ a {
   display: grid;
   min-height: 100vh;
   place-items: center;
-  padding: 72px 80px;
-  overflow: hidden;
+  padding: 24px;
+  overflow: auto;
   background-color: #d6c6b3;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+}
+
+.desk::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background: #d6c6b3 url("./assets/desk-background.png") center / cover no-repeat;
+  pointer-events: none;
+  transform: translateZ(0);
 }
 
 .desk,
@@ -272,6 +278,7 @@ a {
   pointer-events: none;
   transform: rotate(-18deg);
   transform-origin: -34px center;
+  will-change: left, top;
 }
 
 .cursor-pencil::before {
@@ -577,6 +584,8 @@ a {
   font-weight: 700;
   line-height: .8;
   transform: rotate(-4deg);
+  zoom: var(--desk-scale, 1);
+  transform-origin: bottom left;
 }
 
 .note-circle {
@@ -607,16 +616,65 @@ a {
   position: relative;
   z-index: 2;
   display: grid;
-  width: min(1320px, calc(100vw - 280px));
+  width: 1320px;
+  min-width: 1320px;
+  max-width: 1320px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0;
   align-items: center;
   transform: translateX(-180px);
+  zoom: var(--desk-scale, 1);
+  transform-origin: center center;
 }
 
 .phone-disabled .desk-layout {
-  width: min(1320px, calc(100vw - 100px));
+  width: 1320px;
+  min-width: 1320px;
+  max-width: 1320px;
   transform: none;
+}
+
+@supports not (zoom: 1) {
+  .desk-layout,
+  .phone-disabled .desk-layout {
+    transform: scale(var(--desk-scale, 1));
+    transform-origin: center center;
+  }
+
+  .clear-note {
+    transform: rotate(-4deg) scale(var(--desk-scale, 1));
+    transform-origin: bottom left;
+  }
+
+  .pink-eraser {
+    transform: rotate(-10deg) scale(var(--desk-scale, 1));
+    transform-origin: bottom left;
+  }
+
+  .desk-pencil-swap {
+    transform: rotate(-6deg) scale(var(--desk-scale, 1));
+    transform-origin: bottom left;
+  }
+
+  .todo-note {
+    transform: rotate(4deg) scale(var(--desk-scale, 1));
+    transform-origin: top right;
+  }
+
+  .polaroid {
+    transform: rotate(6deg) scale(var(--desk-scale, 1));
+    transform-origin: bottom right;
+  }
+
+  .desk-clock {
+    transform: rotate(-2deg) scale(var(--desk-scale, 1));
+    transform-origin: top left;
+  }
+
+  .mini-calendar {
+    transform: rotate(3deg) scale(var(--desk-scale, 1));
+    transform-origin: top left;
+  }
 }
 
 .sheet {
@@ -1075,6 +1133,8 @@ a {
   box-shadow: 6px 8px 15px rgb(80 58 41 / 20%);
   color: #d9f0df;
   transform: rotate(-2deg);
+  zoom: var(--desk-scale, 1);
+  transform-origin: top left;
 }
 
 .desk-clock span {
@@ -1106,6 +1166,8 @@ a {
   color: var(--ink-dark, #2a2d31);
   grid-template-rows: 25px 45px 18px;
   transform: rotate(3deg);
+  zoom: var(--desk-scale, 1);
+  transform-origin: top left;
 }
 
 .mini-calendar strong {
@@ -1138,6 +1200,8 @@ a {
   box-shadow: 7px 10px 17px rgb(80 58 41 / 21%);
   color: #314b4b;
   transform: rotate(4deg);
+  zoom: var(--desk-scale, 1);
+  transform-origin: top right;
 }
 
 .todo-note h3 {
@@ -1176,6 +1240,8 @@ a {
   box-shadow: 8px 12px 20px rgb(80 58 41 / 24%);
   color: var(--ink-dark, #2a2d31);
   transform: rotate(6deg);
+  zoom: var(--desk-scale, 1);
+  transform-origin: bottom right;
 }
 
 .photo-placeholder {
@@ -1216,8 +1282,8 @@ a {
 
 .pink-eraser {
   position: absolute;
-  bottom: 58px;
-  left: 260px;
+  bottom: 220px;
+  left: 45px;
   display: grid;
   width: 140px;
   height: 56px;
@@ -1229,8 +1295,10 @@ a {
   color: rgb(126 66 75 / 65%);
   font-size: 21px;
   font-weight: 700;
-  transform: rotate(-12deg);
+  transform: rotate(-10deg);
   pointer-events: auto;
+  zoom: var(--desk-scale, 1);
+  transform-origin: bottom left;
 }
 
 .pink-eraser::after {
@@ -1243,8 +1311,8 @@ a {
 
 .desk-pencil-swap {
   position: absolute;
-  bottom: 68px;
-  left: 315px;
+  bottom: 232px;
+  left: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1261,7 +1329,9 @@ a {
   font-weight: 700;
   letter-spacing: 2px;
   pointer-events: auto;
-  transform: rotate(-12deg);
+  transform: rotate(-6deg);
+  zoom: var(--desk-scale, 1);
+  transform-origin: bottom left;
 }
 
 .desk-pencil-swap::before {
@@ -2072,326 +2142,8 @@ a {
 
 @media (max-width: 1150px) {
   .desk {
-    padding-bottom: 120px;
-    overflow-y: auto;
-    row-gap: 54px;
-  }
-
-  .desk-layout {
-    width: min(900px, 100%);
-    transform: none;
-  }
-
-  .iphone {
-    position: relative;
-    top: auto;
-    right: auto;
-    justify-self: center;
-    margin-top: 10px;
-    transform: rotate(1.2deg);
-  }
-}
-
-@media (max-width: 1050px) {
-  .desk {
-    align-items: start;
-    padding: 70px 38px 110px;
-    overflow-y: auto;
-  }
-
-  .desk-layout {
-    width: min(680px, 100%);
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-
-  .phone-disabled .desk-layout {
-    width: min(680px, 100%);
-  }
-
-  .project-sheet {
-    width: 100%;
-    justify-self: center;
-    margin-top: -76px;
-    margin-left: 18px;
-  }
-
-}
-
-@media (max-width: 600px) {
-  .desk {
-    padding: 60px 16px 90px;
-  }
-
-  .main-sheet {
-    background-image:
-      linear-gradient(90deg, transparent 0 39px, rgb(218 103 103 / 45%) 39px 41px, transparent 41px);
-  }
-
-  .main-sheet-ruling {
-    background-image: repeating-linear-gradient(0deg, transparent 0 24px, rgb(102 157 190 / 30%) 24px 26px);
-    mask-image: linear-gradient(to bottom, transparent 0 125px, black 125px);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0 125px, black 125px);
-  }
-
-  .project-sheet-ruling {
-    mask-image: linear-gradient(to bottom, transparent 0 121px, black 121px);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0 121px, black 121px);
-  }
-
-  .sheet::before {
-    height: 125px;
-  }
-
-  .project-sheet::before {
-    height: 121px;
-  }
-
-  .main-sheet::before {
-    background:
-      linear-gradient(
-        90deg,
-        transparent 0 39px,
-        rgb(218 103 103 / 45%) 39px 41px,
-        transparent 41px
-      ),
-      #fbf7e9;
-  }
-
-  .paper-content {
-    padding: 4.5% 6% 5% 14%;
-    gap: 1.5%;
-  }
-
-  .punch-holes {
-    left: 11px;
-  }
-
-  .punch-holes span {
-    width: 12px;
-    height: 12px;
-  }
-
-  .eyebrow {
-    font-size: clamp(16px, 4.5vw, 21px);
-  }
-
-  .intro h1 {
-    font-size: clamp(43px, 13vw, 66px);
-  }
-
-  .name-underline {
-    width: 55%;
-    height: 10px;
-  }
-
-  .intro-copy {
-    font-size: clamp(17px, 4.6vw, 23px);
-  }
-
-  .currently {
-    width: 55%;
-    padding: 4px 8px;
-  }
-
-  .currently span {
-    font-size: clamp(15px, 4vw, 19px);
-  }
-
-  .currently p {
-    font-size: clamp(10px, 2.9vw, 14px);
-  }
-
-  .about h2 {
-    font-size: clamp(21px, 6vw, 30px);
-  }
-
-  .about p {
-    margin-bottom: 4px;
-    font-size: clamp(11px, 3.2vw, 16px);
-    line-height: 1.2;
-  }
-
-  .experience h2 {
-    font-size: clamp(20px, 5.5vw, 27px);
-  }
-
-  .experience-entry {
-    padding: 2px 0 3px 10px;
-  }
-
-  .experience-entry strong {
-    font-size: clamp(14px, 3.8vw, 18px);
-  }
-
-  .experience-title-row > span,
-  .experience-entry > span {
-    font-size: clamp(10px, 2.8vw, 13px);
-  }
-
-  .experience-entry p {
-    font-size: clamp(10px, 2.8vw, 13px);
-  }
-
-  .paper-links {
-    gap: 4px 14px;
-    font-size: clamp(16px, 4.6vw, 21px);
-  }
-
-  .click-me-hint {
-    font-size: clamp(16px, 4.2vw, 20px);
-    margin-top: 4px;
-    margin-left: 6px;
-  }
-
-  .click-me-arrow {
-    width: 24px;
-    height: 18px;
-  }
-
-  .paper-signoff {
-    right: 11%;
-    bottom: 1%;
-    font-size: clamp(12px, 3.5vw, 17px);
-  }
-
-  .doodle-star {
-    right: 4%;
-    bottom: 2%;
-    width: 5%;
-  }
-
-  .project-sheet {
-    width: 100%;
-    margin-top: -42px;
-    margin-left: 8px;
-  }
-
-  .project-content {
-    padding: 7% 8% 7% 18%;
-  }
-
-  .project-header h2 {
-    font-size: clamp(31px, 9vw, 41px);
-  }
-
-  .project-main > span {
-    font-size: clamp(11px, 3vw, 15px);
-  }
-
-  .project-live-btn {
-    font-size: clamp(12px, 3.2vw, 15px);
-    padding: 1px 6px;
-  }
-
-  .project-title-hint {
-    font-size: 17px;
-    top: -20px;
-    left: 80px;
-  }
-
-  .title-hint-arrow {
-    width: 18px;
-    height: 15px;
-  }
-
-  .clear-note {
-    bottom: 18px;
-    left: 16px;
-    width: 134px;
-    height: 112px;
-    font-size: 24px;
-  }
-
-  .clear-note span {
-    font-size: 28px;
-  }
-
-  .iphone {
-    width: min(310px, calc(100vw - 34px));
-    height: 640px;
-  }
-
-  .desk-clock {
-    top: 12px;
-    left: 8px;
-    transform: rotate(-2deg) scale(.68);
-  }
-
-  .mini-calendar,
-  .pink-eraser,
-  .desk-pencil-swap {
-    display: none;
-  }
-
-  .chelsea-doodle-wrapper {
-    right: 12px;
-    bottom: 34px;
-    width: 96px;
-    height: 96px;
-    opacity: 0.88;
-  }
-
-  .grad-doodle-wrapper {
-    top: 4px;
-    right: 10px;
-    width: 115px;
-    height: 62px;
-  }
-
-  .purdue-doodle-wrapper {
-    top: 40%;
-    right: 5%;
-    width: 96px;
-    height: 75px;
-  }
-
-  .purdue-doodle-wrapper .paper-doodle-img {
-    width: 100%;
-    height: 100%;
-  }
-
-  .shifted-experience {
-    margin-top: 0;
-  }
-
-  .cat-doodle-wrapper {
-    top: 6px;
-    right: 10px;
-    width: 110px;
-    height: 76px;
-  }
-
-  .commanders-doodle-wrapper {
-    width: 105px;
-    height: 68px;
-  }
-
-  .tictactoe-doodle-wrapper {
-    bottom: 20px;
-    left: 45%;
-    width: 80px;
-    height: 70px;
-  }
-
-  .apple-doodle-wrapper {
-    bottom: 24px;
-    right: 28px;
-    width: 90px;
-    height: 112px;
-  }
-
-  .todo-note {
-    top: 10px;
-    right: 8px;
-    transform: rotate(4deg) scale(.64);
-  }
-
-  .polaroid {
-    right: 14px;
-    bottom: 16px;
-    transform: rotate(6deg) scale(.62);
-    transform-origin: right bottom;
+    overflow: auto;
+    padding: 24px;
   }
 }
 
